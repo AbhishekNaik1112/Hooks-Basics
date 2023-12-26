@@ -12,7 +12,7 @@ function UseContext() {
   };
   const [likes, setLikes] = useState(0);
   const [isContentBtnClkd, setIsContentBtnClkd] = useState(false);
-  const [ft, setft] = useState(false);
+  const [ft, setFt] = useState(false);
 
   const increaseLike = () => {
     setLikes(likes + 1);
@@ -20,16 +20,19 @@ function UseContext() {
 
   const ContentBtnClkd = () => {
     setIsContentBtnClkd((prevValue) => !prevValue);
+    setFt(true); 
   };
 
   useEffect(() => {
-    if (ft !== false) {
+    if (ft && isContentBtnClkd) {
       alert("Content Button is Clicked, Content Displayed");
+    } else if (ft && !isContentBtnClkd) {
+      alert("Content Button is Clicked Again, Content Hidden");
     }
-  }, [isContentBtnClkd]);
+  }, [isContentBtnClkd, ft]);
 
   useEffect(() => {
-    setft(!ft);
+    setFt(false); 
   }, []);
 
   return (
